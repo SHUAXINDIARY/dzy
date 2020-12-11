@@ -21,7 +21,6 @@
 
 <body>
   <div id="container"></div>
-  <div id="hotpoint"></div>
   <div class="input-card" style="width: auto;">
     <div class="input-item">
       <button class="btn" onclick="heatmap.show()">显示热力图</button>
@@ -38,8 +37,8 @@
       center: [116.483122, 39.905065],
       zoom: 15
     });
-    const getData = async () => {
-      return await fetch('http://localhost:3000/dzy/getData')
+    const getData = () => {
+      return fetch('http://localhost:3000/dzy/getData')
         .then(res => res.json())
     }
     // 初始化热力图
@@ -48,7 +47,6 @@
       // 请求数据
       const res = await getData()
       res.hotData.forEach(item => {
-        console.log(Array.isArray(item))
         hotData.push(...item)
       })
       //初始化heatmap对象
@@ -71,8 +69,8 @@
         });
       });
     }
+    // 判断是否支持canvas
     const checkCanvas = () => {
-      // 判断是否这次hicanvas
       if (!isSupportCanvas()) {
         alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
       }
@@ -82,7 +80,7 @@
         return !!(elem.getContext && elem.getContext('2d'));
       }
     }
-    
+
     initHeatMap()
     checkCanvas()
   </script>
