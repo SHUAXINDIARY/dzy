@@ -31,6 +31,7 @@
   </div>
   <script src="https://webapi.amap.com/maps?v=1.4.15&key=您申请的key值"></script>
   <script>
+    var heatmap
     // 初始化地图
     var map = new AMap.Map("container", {
       resizeEnable: true,
@@ -43,7 +44,7 @@
     }
     // 初始化热力图
     const initHeatMap = async () => {
-      var heatmap, hotData = [];
+      var hotData = [];
       // 请求数据
       const res = await getData()
       res.hotData.forEach(item => {
